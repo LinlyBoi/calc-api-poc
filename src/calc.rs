@@ -91,11 +91,20 @@ impl CalcTree {
             match operation {
                 Operation::Add => Num(a + b),
                 Operation::Sub => Num(a - b),
-                Operation::Div => Num(a / b),
+                Operation::Div => {
+                    if b != 0 {
+                        Num(a / b)
+                    } else {
+                        panic!("DIVISION BY 0");
+                    }
+                }
                 Operation::Mult => Num(a * b),
             }
         } else {
             root.item.clone()
         }
     }
+}
+pub fn parse_string(expression: &str) -> Vec<Item> {
+    let first_split: Vec<&str> = expression.split_inclusive(['+', '-', '*', '/']).collect();
 }
