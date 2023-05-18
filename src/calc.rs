@@ -3,15 +3,6 @@ struct calcNode {
     left: Option<Box<calcNode>>,
     right: Option<Box<calcNode>>,
 }
-impl Default for calcNode {
-    fn default() -> Self {
-        Self {
-            item: Item::Num(1),
-            left: None,
-            right: None,
-        }
-    }
-}
 
 impl calcNode {
     pub fn new(item: Item, left: Option<Box<calcNode>>, right: Option<Box<calcNode>>) -> Self {
@@ -28,9 +19,13 @@ pub enum Operation {
     Div,
     Mult,
 }
-#[derive(Default)]
 pub struct calcTree {
     root: calcNode,
 }
 
-impl calcTree {}
+impl calcTree {
+    pub fn new(item: Item) -> Self {
+        let root = calcNode::new(item, None, None);
+        Self { root }
+    }
+}
